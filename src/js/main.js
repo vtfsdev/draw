@@ -32,6 +32,8 @@ var draw = (function() {
   
       //What shape are we drawing?
       shape='',
+
+      color='',
   
       //Are we drawimg a path?
       isDrawing=false;
@@ -54,6 +56,14 @@ var draw = (function() {
       writeXY: function() {
         document.getElementById('trackX').innerHTML = 'X: ' + x;
         document.getElementById('trackY').innerHTML = 'Y: ' + y;
+      },
+
+      setColor: function(aaa) {
+          color = aaa;
+      },
+
+      getColor: function() {
+          return color;
       },
   
       //Set the x1,y1
@@ -106,9 +116,12 @@ var draw = (function() {
       },
   
       //Draw a circle
-      drawCircle: function() {
+      /*drawCircle: function() {
   
         ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //ctx.strokeStyle = 'blue';
+        //ctx.lineWidth = 500;
+        //ctx.strokeStyle = this.getColor();
         ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
   
         let a = (x1-x2)
@@ -119,7 +132,7 @@ var draw = (function() {
         ctx.arc(x1, y1, radius, 0, 2*Math.PI);
         ctx.stroke();
         ctx.fill();
-      },
+      },*/
   
       //Draw a line
       drawLine: function() {
@@ -132,22 +145,23 @@ var draw = (function() {
       },
   
       //Draw a path
-      drawPath: function() {
+      //drawPath: function() {
         //console.log({x1:x,y1:y,x2:x2,y2:y2});
         //Start by using random fill colors.
-        ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        /*ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
         ctx.beginPath();
         ctx.moveTo(lx, ly);
         ctx.lineTo(x, y);
         ctx.stroke();
-      },
+      },*/
   
       //Draw a rectangle
-      drawRect: function() {
+      /*drawRect: function() {
         //Start by using random fill colors.
+        //ctx.strokeStyle = this.getColor();
         ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
         ctx.fillRect (x1,y1,(x2-x1),(y2-y1));
-      },
+      },*/
 
       /* LAB: Can you figure out how to draw a triangle? */
       drawTriangle: function() {
@@ -223,4 +237,8 @@ var draw = (function() {
   
   document.getElementById('btnPath').addEventListener('click', function(){
       draw.setShape('path');
+  }, false);
+
+  document.getElementById('favcolor').addEventListener('select', function(aaa){
+    draw.setColor(aaa);
   }, false);
