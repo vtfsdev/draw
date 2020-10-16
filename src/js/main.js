@@ -33,7 +33,9 @@ var draw = (function() {
       //What shape are we drawing?
       shape='',
 
-      color='',
+      scolor='',
+
+      fcolor='',
   
       //Are we drawimg a path?
       isDrawing=false;
@@ -58,14 +60,24 @@ var draw = (function() {
         document.getElementById('trackY').innerHTML = 'Y: ' + y;
       },
 
-      setColor: function(aaa) {
-          color = aaa;
+      setSColor: function() {
+          scolor = this.value;
+          console.log(scolor);
       },
 
-      getColor: function() {
-          return color;
+      getSColor: function() {
+          return scolor;
       },
   
+      setFColor: function() {
+        fcolor = this.value;
+        console.log(fcolor);
+      },
+
+      getFColor: function() {
+          return fcolor;
+      },
+
       //Set the x1,y1
       setStart: function() {
         x1=x;
@@ -116,13 +128,15 @@ var draw = (function() {
       },
   
       //Draw a circle
-      /*drawCircle: function() {
+      drawCircle: function() {
   
-        ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
-        //ctx.strokeStyle = 'blue';
-        //ctx.lineWidth = 500;
-        //ctx.strokeStyle = this.getColor();
-        ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        ctx.strokeStyle = this.getSColor();
+      
+        ctx.lineWidth = 20;
+      
+        //ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        ctx.fillStyle = this.getFColor();
   
         let a = (x1-x2)
         let b = (y1-y2)
@@ -132,12 +146,13 @@ var draw = (function() {
         ctx.arc(x1, y1, radius, 0, 2*Math.PI);
         ctx.stroke();
         ctx.fill();
-      },*/
+      },
   
       //Draw a line
       drawLine: function() {
         //Start by using random fill colors.
-        ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        ctx.strokeStyle = this.getSColor();
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -145,28 +160,30 @@ var draw = (function() {
       },
   
       //Draw a path
-      //drawPath: function() {
+      drawPath: function() {
         //console.log({x1:x,y1:y,x2:x2,y2:y2});
         //Start by using random fill colors.
-        /*ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //ctx.strokeStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        ctx.strokeStyle = this.getSColor();
         ctx.beginPath();
         ctx.moveTo(lx, ly);
         ctx.lineTo(x, y);
         ctx.stroke();
-      },*/
+      },
   
       //Draw a rectangle
-      /*drawRect: function() {
+      drawRect: function() {
         //Start by using random fill colors.
-        //ctx.strokeStyle = this.getColor();
-        ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        ctx.fillStyle = this.getFColor();
         ctx.fillRect (x1,y1,(x2-x1),(y2-y1));
-      },*/
+      },
 
       /* LAB: Can you figure out how to draw a triangle? */
       drawTriangle: function() {
         //Start by using random fill colors.
-        ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        //ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+        ctx.strokeStyle = this.getSColor();
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -184,6 +201,7 @@ var draw = (function() {
         canvas.height = mHeight;
         document.querySelector('main').appendChild(canvas);
         this.writeXY();   /* LAB: A value of 0 should load the the trackX and trackY elements on page render. */
+        //document.querySelector("#favcolor").onchange = setColor;
       }
     };
   
@@ -239,6 +257,6 @@ var draw = (function() {
       draw.setShape('path');
   }, false);
 
-  document.getElementById('favcolor').addEventListener('select', function(aaa){
-    draw.setColor(aaa);
-  }, false);
+  document.getElementById('favSColor').onchange = draw.setSColor;
+
+  document.getElementById('favFColor').onchange = draw.setFColor;
