@@ -184,6 +184,7 @@ var draw = (function() {
         //Start by using random fill colors.
         //ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
         ctx.strokeStyle = this.getSColor();
+        ctx.fillStyle = this.getFColor();
         ctx.beginPath();
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
@@ -236,27 +237,57 @@ var draw = (function() {
     draw.setIsDrawing(false);
   }, false);
   
-  document.getElementById('btnRect').addEventListener('click', function(){
-      draw.setShape('rectangle');
-  }, false);
-  
-  document.getElementById('btnLine').addEventListener('click', function(){
-      draw.setShape('line');
-  }, false);
-  
-  document.getElementById('btnCircle').addEventListener('click', function(){
-      draw.setShape('circle');
-  }, false);
+  // Vanilla JS version of code
+  // document.getElementById('btnRect').addEventListener('click', function(){
+  //     draw.setShape('rectangle');
+  // }, false);
+  $('#btnRect').on('click',function(){
+    draw.setShape('rectangle');
+  });
+
+  // Vanilla JS version of code
+  // document.getElementById('btnLine').addEventListener('click', function(){
+  //     draw.setShape('line');
+  // }, false);
+  $('#btnLine').on('click',function(){
+    draw.setShape('line');
+  });
+
+
+  // Vanilla JS version of code
+  // document.getElementById('btnCircle').addEventListener('click', function(){
+  //     draw.setShape('circle');
+  // }, false);
+  $('#btnCircle').on('click',function(){
+    draw.setShape('circle');
+  });
   
   /* LAB: Can you figure out how to draw a triangle? */
-  document.getElementById('btnTriangle').addEventListener('click', function(){
-      draw.setShape('triangle');
-  }, false);
+  // Vanilla JS version of code
+  // document.getElementById('btnTriangle').addEventListener('click', function(){
+  //     draw.setShape('triangle');
+  // }, false);
+  $('#btnTriangle').on('click',function(){
+    draw.setShape('triangle');
+  });
   
-  document.getElementById('btnPath').addEventListener('click', function(){
-      draw.setShape('path');
-  }, false);
+  // Vanilla JS version of code
+  // document.getElementById('btnPath').addEventListener('click', function(){
+  //     draw.setShape('path');
+  // }, false);
+  $('#btnPath').on('click',function(){
+    draw.setShape('path');
+  });
 
-  document.getElementById('favSColor').onchange = draw.setSColor;
 
-  document.getElementById('favFColor').onchange = draw.setFColor;
+  //document.getElementById('favSColor').onchange = draw.setSColor;
+
+  $('#favSColor').on('click',function(){
+    draw.setSColor();
+  });
+
+  //document.getElementById('favFColor').onchange = draw.setFColor;
+
+  $('#favFColor').on('click',function(){
+    draw.setFColor();
+  });
